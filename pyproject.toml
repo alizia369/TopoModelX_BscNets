@@ -1,0 +1,103 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "TopoModelX"
+dynamic = ["version"]
+authors = [
+    {name = "PyT-Team Authors", email = "mustafahajij@gmail.com"}
+]
+readme = "README.md"
+description = "Topological Deep Learning"
+license = {file = "LICENSE.txt"}
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11"
+]
+requires-python = ">= 3.10"
+dependencies=[
+    "tqdm",
+    "numpy",
+    "scipy",
+    "requests",
+    "scikit-learn",
+    "matplotlib",
+    "networkx",
+    "gudhi",
+    "pandas",
+    "pyg-nightly",
+    "toponetx @ git+https://github.com/pyt-team/TopoNetX.git",
+]
+
+[project.optional-dependencies]
+doc = [
+    "jupyter",
+    "nbsphinx",
+    "nbsphinx_link",
+    "sphinx",
+    "sphinx_gallery",
+    "pydata-sphinx-theme"
+]
+lint = [
+    "black",
+    "black[jupyter]",
+    "flake8",
+    "flake8-docstrings",
+    "Flake8-pyproject",
+    "isort",
+    "pre-commit"
+]
+test = [
+    "pytest",
+    "pytest-cov",
+    "coverage",
+    "jupyter"
+]
+
+dev = ["TopoModelX[test, lint]"]
+all = ["TopoModelX[dev]"]
+
+[project.urls]
+homepage="https://github.com/pyt-team/TopoModelX"
+repository="https://github.com/pyt-team/TopoModelX"
+
+[tool.setuptools.dynamic]
+version = {attr = "topomodelx.__version__"}
+
+[tool.setuptools.packages.find]
+include = [
+    "topomodelx",
+    "topomodelx.*"
+]
+
+[tool.pytest.ini_options]
+addopts = "--capture=no"
+
+[tool.isort]
+multi_line_output = 3
+include_trailing_comma = true
+skip = [".gitignore", "__init__.py"]
+
+[tool.flake8]
+application_import_names = "topomodelx"
+docstring-convention = "numpy"
+exclude = [
+    "topomodelx/__init__.py",
+    "docs/source/conf.py"
+]
+
+import_order_style = "smarkets"
+max-line-length = 88
+extend-ignore = ["E501", "F401", "E203"]
+per-file-ignores = [
+    "*/__init__.py: D104, F401",
+]
